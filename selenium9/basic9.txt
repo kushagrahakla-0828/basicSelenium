@@ -1,0 +1,53 @@
+1. docker version
+   docker version
+
+2. docker login
+   docker login
+
+3. docker images
+   docker images
+
+4. docker pull
+   docker pull ubuntu
+
+5. docker images --help
+   docker images --help
+
+6. docker run
+   docker run -it ubuntu
+
+7. docker ps
+   docker ps
+
+8. docker start
+   docker start <container_id>
+
+9. docker pause
+   docker pause <container_id>
+
+10. docker unpause
+    docker unpause <container_id>
+
+11. docker stop
+    docker stop <container_id>
+
+12. docker stats
+    docker stats
+
+13. docker rm
+    docker rm <container_id>
+
+14. docker inspect
+    docker inspect ubuntu
+
+15. docker rmi
+    docker rmi ubuntu
+
+16. docker commit
+    docker commit <container_id> myimage:latest
+
+17. docker push
+    docker push username/myimage:latest
+
+18. docker history
+    docker history ubuntu
