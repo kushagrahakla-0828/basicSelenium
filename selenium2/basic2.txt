@@ -1,0 +1,62 @@
+1. git --version
+
+2. git --help
+
+3. git init
+
+4. git config
+   git config --global user.name ""
+   git config --global user.email ""
+
+5. git config --list
+
+6. git status
+
+7. git add
+
+8. git commit
+   git commit -m "first commit"
+
+9. git remote add origin
+   git remote add origin https://github.com/username/repo.git
+
+10. git remote set-url origin
+    git remote set-url origin https://github.com/username/repo.git
+
+11. git remote -v
+
+12. git push
+    git push -u origin main
+
+13. git branch
+
+14. git branch new
+
+15. git branch -r
+
+16. git branch -a
+
+17. git checkout new
+
+18. git checkout main
+
+19. git fetch
+    git fetch origin
+
+20. git fetch --prune
+    git fetch --prune
+
+21. git pull
+    git pull origin main
+
+22. git merge
+    git merge new
+
+23. git clone
+    git clone https://github.com/username/repo.git
+
+24. git log
+    git log
+
+25. git rm
+    git rm file.txt
