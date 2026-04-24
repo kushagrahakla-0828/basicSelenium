@@ -1,0 +1,205 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+-----------------------------------------------------------
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Plan phase') {
+            steps {
+                echo 'Hi. This is Shree Jaswal'
+            }
+        }
+
+        stage('code phase') {
+            steps {
+                input message: 'Do you want to continue?'
+            }
+        }
+
+        stage('integrate phase') {
+            when {
+                not {
+                    branch 'master'
+                }
+            }
+            steps {
+                echo 'Integration test passed'
+            }
+        }
+
+        stage('testing phase') {
+            parallel {
+                stage('unit test') {
+                    steps {
+                        echo 'running unit test'
+                    }
+                }
+            }
+        }
+    }
+}
+
+-----------------------------------------------------------
+
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = "DevOps-Demo-App"
+        BUILD_VERSION = "1.0.${BUILD_NUMBER}"
+    }
+
+    options {
+        timeout(time: 60, unit: 'MINUTES')
+    }
+
+    stages {
+
+        stage('Initialize') {
+            steps {
+                echo "Starting pipeline for ${APP_NAME}"
+                echo "Build Version: ${BUILD_VERSION}"
+            }
+        }
+
+        stage('Checkout Source Code') {
+            steps {
+                echo "Simulating source code retrieval (No Git repository used)"
+            }
+        }
+
+        stage('Plan Phase') {
+            steps {
+                echo "Planning build process"
+                bat 'echo Preparing project structure'
+            }
+        }
+
+        stage('Code Review Approval') {
+            steps {
+                input message: 'Approve build to continue?', ok: 'Approve'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo "Installing dependencies..."
+                bat 'echo Installing required libraries'
+            }
+        }
+
+        stage('Static Code Analysis') {
+            steps {
+                echo "Running static code analysis..."
+                bat 'echo Code quality scan completed'
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                echo "Building application..."
+                bat 'echo Build successful'
+            }
+        }
+
+        stage('Testing Phase') {
+            parallel {
+
+                stage('Unit Testing') {
+                    steps {
+                        echo "Running unit tests..."
+                        bat 'echo Unit tests passed'
+                    }
+                }
+
+                stage('Integration Testing') {
+                    steps {
+                        echo "Running integration tests..."
+                        bat 'echo Integration tests passed'
+                    }
+                }
+
+                stage('API Testing') {
+                    steps {
+                        echo "Running API tests..."
+                        bat 'echo API tests passed'
+                    }
+                }
+
+                stage('Security Scan') {
+                    steps {
+                        echo "Running security scan..."
+                        bat 'echo Security scan completed'
+                    }
+                }
+            }
+        }
+
+        stage('Package Application') {
+            steps {
+                echo "Packaging application..."
+                bat 'echo Creating build artifact'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                echo "Building Docker image..."
+                bat 'echo Docker image built successfully'
+            }
+        }
+
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying to staging environment..."
+                bat 'echo Deployment to staging successful'
+            }
+        }
+
+        stage('Manual Approval for Production') {
+            steps {
+                input message: 'Deploy to Production?', ok: 'Deploy'
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying to production..."
+                bat 'echo Production deployment successful'
+            }
+        }
+
+        stage('Monitoring') {
+            steps {
+                echo "Starting monitoring tools..."
+                bat 'echo Monitoring enabled'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Investigate logs."
+        }
+        always {
+            echo "Cleaning workspace..."
+            cleanWs()
+        }
+    }
+}
