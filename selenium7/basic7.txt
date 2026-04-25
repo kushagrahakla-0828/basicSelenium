@@ -19,7 +19,7 @@ pipeline {
 
         stage('Plan phase') {
             steps {
-                echo 'Hi. This is Shree Jaswal'
+                echo 'Hi. This is ABC XYZ'
             }
         }
 
